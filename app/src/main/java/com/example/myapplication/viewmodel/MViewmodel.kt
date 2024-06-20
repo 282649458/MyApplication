@@ -1,11 +1,11 @@
-package viewmodel
+package com.example.myapplication.viewmodel
 
 import android.app.admin.DevicePolicyManager.OnClearApplicationUserDataListener
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import bean.Story
+import com.example.myapplication.bean.Story
 
 class MViewmodel : ViewModel() {
   private val mutableList = mutableListOf<Story>()
