@@ -9,7 +9,9 @@ import com.example.myapplication.fragment.FirstFragment
 import com.example.myapplication.fragment.SecondFragment
 import com.example.myapplication.fragment.ThirdFragment
 
-class ViewpagerAdapter(fa:FragmentActivity) : FragmentStateAdapter(fa) {
+class ViewpagerAdapter(fa:FragmentActivity,val l: List<Int>) : FragmentStateAdapter(fa) {
+
+
 
     override fun getItemCount(): Int =3
 
