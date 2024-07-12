@@ -31,15 +31,10 @@ class TestActivity : AppCompatActivity() {
         })
         TabLayoutMediator(mBinding.tabLayout, mBinding.vpTest) { tab, position ->
             when(position){
-               0-> tab.text = "主页"
+                0-> tab.text = "主页"
                 1->tab.text="其他"
                 2->tab.text="我"
             }
-
         }.attach()
-
-
     }
-
-
 }
