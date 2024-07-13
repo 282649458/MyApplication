@@ -27,17 +27,17 @@ class MainActivity : AppCompatActivity() {
            val intent=Intent(this,TestActivity::class.java)
            startActivity(intent)
        }
+
     }
 
     private fun inRv() {
         mBinding.rvMain.apply {
         layoutManager=LinearLayoutManager(this@MainActivity)
-
+        adapter= madapter
         }
-        mViewmodel._mRvList.observe(this@MainActivity){
-            val mList=(it as MutableList<Story>).toMutableList()
+        mViewmodel.mRvList.observe(this@MainActivity){
+            val mList=(it as MutableList<String>).toMutableList()
             madapter.submitList(mList)
         }
-        mBinding.rvMain.adapter=madapter
     }
 }

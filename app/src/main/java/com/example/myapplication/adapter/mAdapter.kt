@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.bean.Story
 import com.example.myapplication.R
 
-class mAdapter() : ListAdapter<Story, mAdapter.OneHolder>(object : DiffUtil.ItemCallback<Story>(){
-    override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
-        return oldItem.name == newItem.name
+class mAdapter() : ListAdapter<String, mAdapter.OneHolder>(object : DiffUtil.ItemCallback<String>(){
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
-        return oldItem.name == newItem.name
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
     }
 }){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OneHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_main, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false)
         return OneHolder((itemView))
     }
 
@@ -31,10 +31,10 @@ class mAdapter() : ListAdapter<Story, mAdapter.OneHolder>(object : DiffUtil.Item
         holder.bind(itemData)
     }
     inner class OneHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.Mtest)
+        private val textView: TextView = itemView.findViewById(R.id.rv_text)
 
-        fun bind(itemData: Story ){
-            textView.text =itemData.name.toString()
+        fun bind(itemData: String ){
+            textView.text =itemData
         }
 
     }
