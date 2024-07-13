@@ -1,46 +1,43 @@
 package com.example.myapplication.viewmodel
 
-import android.app.admin.DevicePolicyManager.OnClearApplicationUserDataListener
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.bean.Story
+import com.example.myapplication.repository.GetAnswerData
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+
 
 class MViewmodel : ViewModel() {
-  private val mutableList = mutableListOf<Story>()
+    private val mRvList = MutableLiveData<List<String>>()
 
+    val _mRvList: LiveData<List<String>>
+        get() = mRvList
 
-  private val _rvList: MutableLiveData<List<Story>> = MutableLiveData<List<Story>>()
-  val rvList: LiveData<List<Story>>
-   get() = _rvList
- private var num = 21
+    init {
+        getRvList()
+    }
+    fun getRvList() {
+        GetAnswerData.NetRepository.getSearchData().subscribe(object : Observer<List<String>>{
+            override fun onSubscribe(d: Disposable) {
+            }
 
- init {
-  initList()
- }
+            override fun onError(e: Throwable) {
+                Log.d("Error", "${e.message}")
 
+            }
 
- private fun initList() {
-  for (i in 1..20) {
-   mutableList.add((Story((i))))
-  }
-  _rvList.postValue(mutableList)
- }
+            override fun onComplete(){
+            }
 
+            override fun onNext(t: List<String>) {
+                mRvList.postValue(t)
+                Log.d("MViewmodel","$t")
+            }
 
-
-
- fun addNum() {
-  for (i in 1..5) {
-   mutableList.add(Story(num))
-   num++
-  }
-  Log.d("LogTest", "测试数据${mutableList}")
-
-  _rvList.postValue(mutableList)
-  Log.d("wefweafweafwefweaf", "测试数据${System.identityHashCode(mutableList)}")
-
-
- }
+        })
+    }
 }

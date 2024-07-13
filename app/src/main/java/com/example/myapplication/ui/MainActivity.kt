@@ -22,35 +22,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
-        iniListener()
         inRv()
        mBinding.turnTo.setOnClickListener(){
            val intent=Intent(this,TestActivity::class.java)
            startActivity(intent)
        }
-
     }
 
     private fun inRv() {
         mBinding.rvMain.apply {
         layoutManager=LinearLayoutManager(this@MainActivity)
-        adapter= madapter
+
         }
-        mViewmodel.rvList.observe(this@MainActivity){
+        mViewmodel._mRvList.observe(this@MainActivity){
             val mList=(it as MutableList<Story>).toMutableList()
             madapter.submitList(mList)
         }
-    }
-
-    private fun iniListener() {
-        mBinding.rvMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!recyclerView.canScrollVertically(1)) {
-                    mViewmodel.addNum()
-
-                }
-            }
-        })
+        mBinding.rvMain.adapter=madapter
     }
 }
